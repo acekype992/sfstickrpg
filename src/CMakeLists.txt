@@ -3,10 +3,14 @@ set(CMAKE_CXX_STANDARD_REQUIRED ON)
 set(CMAKE_INCLUDE_CURRENT_DIR ON)
 
 set(SFSTICKRPG_HEADERS sfstickrpg/asset_manager.hpp
+                       sfstickrpg/state_manager.hpp
+                       sfstickrpg/state.hpp
+                       sfstickrpg/game_engine_data.hpp
 )
 
-set(SFSTICKRPG_SOURCES sfstickrpg/main.cpp
+set(SFSTICKRPG_SOURCES sfstickrpg/game.cpp
                        sfstickrpg/asset_manager.cpp
+                       sfstickrpg/state_manager.cpp
 )
 
 add_executable(sfstickrpg ${SFSTICKRPG_SOURCES} ${SFSTICKRPG_HEADERS})
