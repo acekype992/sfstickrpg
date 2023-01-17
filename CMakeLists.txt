@@ -1,6 +1,6 @@
 cmake_minimum_required(VERSION 3.23)
 
-project(StickRPG)
+project(SFStickRPG)
 
 set(BUILD_SHARED_LIBS OFF CACHE BOOL "" FORCE)
 
