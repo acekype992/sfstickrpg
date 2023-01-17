@@ -1,5 +1,5 @@
 #include "game_engine_data.hpp"
-#include "game_state_running.hpp"
+#include "game_state_start.hpp"
 
 #define WINDOW_BASE_WIDTH   1200
 #define WINDOW_BASE_HEIGHT  1000
@@ -23,7 +23,7 @@ int main(int argc, char **argv)
 
     Game::load_textures(geData->assets);
 
-    geData->states.addState(std::make_unique<GameStateRunning>(geData));
+    geData->states.addState(std::make_unique<GameStateStart>(geData));
     while(geData->window.isOpen())
     {
         geData->states.process();
@@ -43,5 +43,5 @@ int main(int argc, char **argv)
 
 void Game::load_textures(AssetManager &assets)
 {
-
+    assets.loadTexture("bg-start-menu", "../resources/background_start_menu.png");
 }
