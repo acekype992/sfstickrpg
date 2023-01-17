@@ -1,4 +1,5 @@
 #include "game_engine_data.hpp"
+#include "game_state_running.hpp"
 
 #define WINDOW_BASE_WIDTH   1200
 #define WINDOW_BASE_HEIGHT  1000
@@ -22,6 +23,7 @@ int main(int argc, char **argv)
 
     Game::load_textures(geData->assets);
 
+    geData->states.addState(std::make_unique<GameStateRunning>(geData));
     while(geData->window.isOpen())
     {
         geData->states.process();
