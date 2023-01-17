@@ -1,0 +1,23 @@
+if(NOT EXISTS ${CMAKE_CURRENT_SOURCE_DIR}/SFML/CMakeLists.txt)
+    message(STATUS "SFML sub-module is not available.")
+    message(FATAL_ERROR "start command : git submodule update --init")
+endif()
+
+set(SFML_INSTALL_PKGCONFIG_FILES FALSE CACHE BOOL "" FORCE)
+set(SFML_BUILD_EXAMPLES OFF CACHE BOOL "" FORCE)
+set(SFML_BUILD_DOC      OFF CACHE BOOL "" FORCE)
+set(SFML_BUILD_AUDIO    OFF CACHE BOOL "" FORCE)
+set(SFML_BUILD_GRAPHICS ON  CACHE BOOL "" FORCE)
+set(SFML_BUILD_WINDOW   ON  CACHE BOOL "" FORCE)
+set(SFML_BUILD_NETWORK  OFF CACHE BOOL "" FORCE)
+set(SFML_STATIC ON CACHE BOOL "" FORCE)
+
+add_subdirectory(SFML)
+
+set_target_properties(sfml-graphics PROPERTIES ARCHIVE_OUTPUT_DIRECTORY ${CMAKE_CURRENT_SOURCE_DIR}/lib/)
+set_target_properties(sfml-system   PROPERTIES ARCHIVE_OUTPUT_DIRECTORY ${CMAKE_CURRENT_SOURCE_DIR}/lib/)
+set_target_properties(sfml-window   PROPERTIES ARCHIVE_OUTPUT_DIRECTORY ${CMAKE_CURRENT_SOURCE_DIR}/lib/)
+
+set(SFML_LIBS sfml-graphics sfml-system sfml-window PARENT_SCOPE)
+set(SFML_INCLUDE_DIR ${CMAKE_CURRENT_SOURCE_DIR}/SFML/include PARENT_SCOPE)
+
