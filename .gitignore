@@ -1,0 +1,5 @@
+bin/
+build/
+extlib/lib/
+
+CMakeLists.txt.user
