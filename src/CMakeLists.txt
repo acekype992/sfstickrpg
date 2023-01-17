@@ -6,11 +6,14 @@ set(SFSTICKRPG_HEADERS sfstickrpg/asset_manager.hpp
                        sfstickrpg/state_manager.hpp
                        sfstickrpg/state.hpp
                        sfstickrpg/game_engine_data.hpp
+                       sfstickrpg/game_state.hpp
+                       sfstickrpg/game_state_running.hpp
 )
 
 set(SFSTICKRPG_SOURCES sfstickrpg/game.cpp
                        sfstickrpg/asset_manager.cpp
                        sfstickrpg/state_manager.cpp
+                       sfstickrpg/game_state_running.cpp
 )
 
 add_executable(sfstickrpg ${SFSTICKRPG_SOURCES} ${SFSTICKRPG_HEADERS})
