@@ -1,0 +1,28 @@
+#!/bin/bash
+# Automatic repository configuration script 
+
+BUILD_TYPE=$1
+GENERATOR=Ninja
+CCOMPILER=/usr/bin/gcc
+CXXCOMPILER=/usr/bin/g++
+
+function HelperText()
+{
+    echo "usage : configure <BUILD_TYPE>"
+    echo "BUILD_TYPE :"
+    echo -e "\tdebug"
+    echo -e "\trelease"
+}
+
+
+if [ -z "${BUILD_TYPE}" ]; then
+   BUILD_TYPE=release
+elif [[ $BUILD_TYPE != "release"  &&  $BUILD_TYPE != "debug" ]]; then
+    HelperText
+    exit
+fi
+
+echo "BUILD_TYPE : ${BUILD_TYPE^}"
+
+git submodule update --init --recursive
+cmake -S . -B build/${BUILD_TYPE,,}/ -DCMAKE_BUILD_TYPE:STRING=${BUILD_TYPE^} -G$GENERATOR -DCMAKE_C_COMPILER:PATH=$CCOMPILER -DCMAKE_CXX_COMPILER:PATH=$CXXCOMPILER

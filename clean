@@ -1,0 +1,5 @@
+#!/bin/bash
+
+rm -rfv bin
+rm -rfv build
+rm -rfv extlib/lib
