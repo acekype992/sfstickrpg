@@ -2,18 +2,18 @@ set(CMAKE_CXX_STANDARD 20)
 set(CMAKE_CXX_STANDARD_REQUIRED ON)
 set(CMAKE_INCLUDE_CURRENT_DIR ON)
 
-set(SFSTICKRPG_HEADERS sfstickrpg/asset_manager.hpp
-                       sfstickrpg/state_manager.hpp
-                       sfstickrpg/state.hpp
-                       sfstickrpg/game_engine_data.hpp
-                       sfstickrpg/game_state.hpp
+set(SFSTICKRPG_HEADERS sfstickrpg/GameEngine/asset_manager.hpp
+                       sfstickrpg/GameEngine/state_manager.hpp
+                       sfstickrpg/GameEngine/state.hpp
+                       sfstickrpg/GameEngine/game_engine_data.hpp
+                       sfstickrpg/GameEngine/game_state.hpp
                        sfstickrpg/game_state_start.hpp
                        sfstickrpg/game_state_running.hpp
 )
 
-set(SFSTICKRPG_SOURCES sfstickrpg/game.cpp
-                       sfstickrpg/asset_manager.cpp
-                       sfstickrpg/state_manager.cpp
+set(SFSTICKRPG_SOURCES sfstickrpg/GameEngine/asset_manager.cpp
+                       sfstickrpg/GameEngine/state_manager.cpp
+                       sfstickrpg/game.cpp
                        sfstickrpg/game_state_start.cpp
                        sfstickrpg/game_state_running.cpp
 )
