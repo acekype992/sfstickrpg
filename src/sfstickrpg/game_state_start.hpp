@@ -3,7 +3,7 @@
 
 #include <SFML/Graphics/Sprite.hpp>
 
-#include "game_state.hpp"
+#include "GameEngine/game_state.hpp"
 
 
 class GameEngineData;
