@@ -1,8 +1,8 @@
 #include "game_engine_data.hpp"
 #include "game_state_start.hpp"
 
-#define WINDOW_BASE_WIDTH   1200
-#define WINDOW_BASE_HEIGHT  1000
+#define WINDOW_BASE_WIDTH   800
+#define WINDOW_BASE_HEIGHT  680
 
 namespace Game {
 void load_textures(AssetManager &assets);
