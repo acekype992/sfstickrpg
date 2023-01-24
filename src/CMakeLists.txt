@@ -8,13 +8,15 @@ set(SFSTICKRPG_HEADERS sfstickrpg/GameEngine/game_engine_data.hpp
                        sfstickrpg/GameEngine/state_manager.hpp
                        sfstickrpg/GameEngine/state.hpp
                        sfstickrpg/GameEngine/state_game.hpp
+
+                       sfstickrpg/States/game_state_running.hpp
 )
 
 set(SFSTICKRPG_SOURCES sfstickrpg/GameEngine/asset_manager.cpp
                        sfstickrpg/GameEngine/state_manager.cpp
                        sfstickrpg/game.cpp
-                       sfstickrpg/game_state_start.cpp
-                       sfstickrpg/game_state_running.cpp
+
+                       sfstickrpg/States/game_state_running.cpp
 )
 
 add_executable(sfstickrpg ${SFSTICKRPG_SOURCES} ${SFSTICKRPG_HEADERS})
