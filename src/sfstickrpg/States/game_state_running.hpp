@@ -1,20 +1,18 @@
 #ifndef GAME_STATE_RUNNING_HPP
 #define GAME_STATE_RUNNING_HPP
 
-#include "GameEngine/game_state.hpp"
+#include "GameEngine/state_game.hpp"
 
-class GameStateRunning : public GameStateBase
+class GameStateRunning : public StateGame
 {
 public:
-    using GameStateBase::GameStateBase;
+    using StateGame::StateGame;
     ~GameStateRunning() noexcept = default;
 
     virtual void initialize() override;
+    virtual void pre_update() override;
+    virtual void update() override;
     virtual void draw() override;
-    virtual void update(float dt) override;
-
-    virtual void pause() override;
-    virtual void resume() override;
 
 protected:
     void keyPressEvent(const Event::KeyEvent &event) override;

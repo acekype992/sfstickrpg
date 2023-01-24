@@ -1,31 +1,25 @@
 #include "game_state_running.hpp"
 
-
 void GameStateRunning::initialize()
 {
 
 }
 
 
+void GameStateRunning::pre_update()
+{
+
+
+}
+
+
+void GameStateRunning::update()
+{
+
+}
+
+
 void GameStateRunning::draw()
-{
-
-}
-
-
-void GameStateRunning::update(float dt)
-{
-
-}
-
-
-void GameStateRunning::pause()
-{
-
-}
-
-
-void GameStateRunning::resume()
 {
 
 }
@@ -45,7 +39,6 @@ void GameStateRunning::keyReleaseEvent(const Event::KeyEvent &event)
 
 void GameStateRunning::mouseMoveEvent(const Event::MouseMoveEvent &event)
 {
-
 }
 
 
@@ -59,4 +52,3 @@ void GameStateRunning::resizeEvent(const Event::SizeEvent &event)
 {
 
 }
-

@@ -18,9 +18,7 @@ namespace GameEngine {
 
 static void load_textures(AssetManager &assets)
 {
-    assets.loadTexture("tileset", "../resources/tileset.png");
-    assets.loadTexture("tilesetrpg", "../resources/tilesetrpg.png");
-    assets.loadTexture("player", "../resources/player.png", true);
+
 }
 
 inline const sf::VideoMode VideoMode    {__VIDEOMODE};
