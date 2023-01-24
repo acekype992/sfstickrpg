@@ -2,7 +2,7 @@
 #include "state_manager.hpp"
 
 
-void StateManager::addState(std::unique_ptr<State> state, bool replace)
+void StateManager::add_state(std::unique_ptr<State> state, bool replace) noexcept
 {
     newState_ = std::move(state);
     add_ = true;
@@ -10,13 +10,13 @@ void StateManager::addState(std::unique_ptr<State> state, bool replace)
 }
 
 
-void StateManager::removeState()
+void StateManager::remove_state() noexcept
 {
     remove_ = true;
 }
 
 
-std::unique_ptr<State>& StateManager::currentState() noexcept
+std::unique_ptr<State>& StateManager::current_state()
 {
     assert(!states_.empty() && "states_ is empty || no state defined");
 
@@ -28,7 +28,7 @@ void StateManager::process()
 {
     if(remove_ && !states_.empty())
     {
-        removeState();
+        remove_state();
         remove_ = false;
     }
 

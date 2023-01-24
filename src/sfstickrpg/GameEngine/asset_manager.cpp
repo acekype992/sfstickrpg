@@ -1,42 +1,45 @@
 #include <cassert>
 #include "asset_manager.hpp"
 
-void AssetManager::loadTexture(const std::string &name, const std::string &filename)
+void AssetManager::loadTexture(const std::string &name, const std::string &filename, bool smoothOn, bool repeatOn)
 {
     assert(textures_.find(name) == textures_.end() &&
            "the name to identify the texture already exists");
 
-    sf::Texture texture;
-    if(texture.loadFromFile(filename))
+    TexturePtr texture = std::make_unique<sf::Texture>();
+    if(texture->loadFromFile(filename))
     {
-        textures_.insert({name, texture});
+        texture->setSmooth(smoothOn);
+        texture->setRepeated(repeatOn);
+        textures_.insert({name, std::move(texture)});
     }
 }
 
-Texture& AssetManager::getTexture(const std::string &name)
+sf::Texture& AssetManager::getTexture(const std::string &name)
 {
     assert(textures_.find(name) != textures_.end() &&
             "the requested texture cannot be found");
 
-    return textures_[name];
+    return *textures_[name].get();
 }
 
-void AssetManager::loadFont(const std::string &name, const std::string &filename)
+void AssetManager::loadFont(const std::string &name, const std::string &filename, bool smoothOn)
 {
-    assert(textures_.find(name) == textures_.end() &&
+    assert(fonts_.find(name) == fonts_.end() &&
            "the name to identify the font already exists");
 
-    sf::Font font;
-    if(font.loadFromFile(filename))
+    FontPtr font = std::make_unique<sf::Font>();
+    if(font->loadFromFile(filename))
     {
-        fonts_.insert({name, font});
+        font->setSmooth(smoothOn);
+        fonts_.insert({name, std::move(font)});
     }
 }
 
-Font& AssetManager::getFont(const std::string &name)
+sf::Font& AssetManager::getFont(const std::string &name)
 {
     assert(fonts_.find(name) != fonts_.end() &&
             "the requested font cannot be found");
 
-    return fonts_[name];
+    return *fonts_[name].get();
 }

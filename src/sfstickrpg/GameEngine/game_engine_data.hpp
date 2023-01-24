@@ -1,18 +1,38 @@
 #ifndef GAME_ENGINE_DATA_HPP
 #define GAME_ENGINE_DATA_HPP
 
+#define __WINDOW_BASE_WIDTH     800
+#define __WINDOW_BASE_HEIGHT    800
+#define __WINDOW_PIXEL_DEPTH    32
+
 #include <SFML/Graphics/RenderWindow.hpp>
+
+#define __VIDEOMODE     sf::VideoMode(__WINDOW_BASE_WIDTH, \
+                                       __WINDOW_BASE_HEIGHT,\
+                                         __WINDOW_PIXEL_DEPTH)
+
 #include "asset_manager.hpp"
 #include "state_manager.hpp"
 
-using Window = sf::RenderWindow;
-using VideoMode = sf::VideoMode;
+namespace GameEngine {
+
+static void load_textures(AssetManager &assets)
+{
+    assets.loadTexture("tileset", "../resources/tileset.png");
+    assets.loadTexture("tilesetrpg", "../resources/tilesetrpg.png");
+    assets.loadTexture("player", "../resources/player.png", true);
+}
+
+inline const sf::VideoMode VideoMode    {__VIDEOMODE};
+inline const sf::Vector2i  TileSize     {32, 32};
 
 struct GameEngineData
 {
     AssetManager assets;
     StateManager states;
-    Window window;
+    sf::RenderWindow window;
 };
+
+} // GameEngine namespace
 
 #endif // GAME_ENGINE_DATA_HPP

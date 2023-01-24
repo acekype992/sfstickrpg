@@ -12,12 +12,11 @@ public:
     StateManager() noexcept = default;
     ~StateManager() noexcept = default;
 
-    void addState(std::unique_ptr<State> state, bool replace = false);
-    void removeState();
-
+    void add_state(std::unique_ptr<State> state, bool replace = false) noexcept;
+    void remove_state() noexcept;
     void process();
 
-    std::unique_ptr<State>& currentState() noexcept;
+    std::unique_ptr<State>& current_state();
 
 private:
     std::stack<std::unique_ptr<State>> states_;
