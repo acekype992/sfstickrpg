@@ -2,3 +2,6 @@
 	path = extlib/SFML
 	url = https://github.com/SFML/SFML
 	branch = 2.6.x
+[submodule "src/ackmatrix"]
+	path = src/ackmatrix
+	url = https://github.com/acekype992/ackmatrix
