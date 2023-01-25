@@ -1,5 +1,14 @@
-#include "GameEngine/game_engine_data.hpp"
+#define __WINDOW_BASE_WIDTH     800
+#define __WINDOW_BASE_HEIGHT    800
+#define __WINDOW_PIXEL_DEPTH    32
+
+#include "Core/game_engine_data.hpp"
 #include "States/game_state_running.hpp"
+
+#include "tileset.hpp"
+#include "map.hpp"
+
+#include <SFML/Graphics/Sprite.hpp>
 
 int main(int argc, char **argv)
 {
@@ -14,6 +23,11 @@ int main(int argc, char **argv)
 
     geData.states.add_state(std::make_unique<GameStateRunning>(geData));
 
+    Tileset tileset {32, 32, geData.assets.getTexture("tileset")};
+
+    Map sp;
+    sp.initialize(15, 15, tileset);
+
     while(geData.window.isOpen())
     {
         geData.states.process();
@@ -25,8 +39,15 @@ int main(int argc, char **argv)
 
         geData.window.clear(sf::Color::Black);
         geData.states.current_state()->draw();
+        geData.window.draw(sp);
         geData.window.display();
     }
 
     return 0;
+}
+
+
+static void GameEngine::load_textures(AssetManager &assets)
+{
+    assets.loadTexture("tileset", "../resources/tilesetrpg.png");
 }

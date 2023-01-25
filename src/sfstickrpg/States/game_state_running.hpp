@@ -1,7 +1,7 @@
 #ifndef GAME_STATE_RUNNING_HPP
 #define GAME_STATE_RUNNING_HPP
 
-#include "GameEngine/state_game.hpp"
+#include "Core/state_game.hpp"
 
 class GameStateRunning : public StateGame
 {
