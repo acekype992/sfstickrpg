@@ -5,3 +5,4 @@
 [submodule "src/ackmatrix"]
 	path = src/ackmatrix
 	url = https://github.com/acekype992/ackmatrix
+	branch = master
