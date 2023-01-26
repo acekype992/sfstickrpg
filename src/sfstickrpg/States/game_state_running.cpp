@@ -5,7 +5,7 @@ void GameStateRunning::initialize()
     gameViewZoom_ = 0.55f;
 
     Tileset& tileset = assets.getTileset("tileset");
-    mapByString_.insert({"map1", std::move(Map("mat1", tileset))});
+    mapByString_.insert({"map1", std::move(Map("../resources/Maps/mat1", tileset))});
 
     currentMap_ = &mapByString_.find("map1")->second;
 }
