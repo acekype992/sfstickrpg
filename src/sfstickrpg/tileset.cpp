@@ -1,50 +1,55 @@
 #include "tileset.hpp"
 
 
-
-Tileset::Tileset()
-{
-
-}
-
-
 Tileset::Tileset(unsigned int width, unsigned int height, sf::Texture &texture)
-    : tileWidth_ {width}
-    , tileHeight_ {height}
-    , tileset_ {std::make_unique<sf::Texture>(texture)}
+    : tilesetTexture_ {std::make_unique<sf::Texture>(texture)}
+    , tilesetSize_ {tilesetTexture_->getSize()}
+    , tileSize_{width, height}
 {
-    const sf::Vector2u txSize {tileset_->getSize()};
-    sf::Vector2u matSize { txSize.x / tileWidth_, txSize.y / tileHeight_};
+    sf::Vector2u matSize { tilesetSize_.x / tileSize_.x,
+                           tilesetSize_.y / tileSize_.y};
+
     mat_.create(matSize.x, matSize.y);
 
     for(std::size_t y {0}; y < matSize.y; ++y)
-    {
         for(std::size_t x {0}; x < matSize.x; ++x)
         {
-            auto& rect = mat_(x,y);
-              rect = sf::IntRect(x,
-                                 y,
-                                 tileWidth_,
-                                 tileHeight_);
+            sf::IntRect &tileRect = mat_(x,y);
+            tileRect.left = x;
+            tileRect.top  = y;
+            tileRect.width = width;
+            tileRect.height = height;
+
+            tiles_.insert({tiles_.size(), tileRect});
         }
-    }
 }
 
 
-sf::Texture& Tileset::getTexture() const
+sf::Texture& Tileset::getTexture() const noexcept
 {
-    return *tileset_.get();
+    return *tilesetTexture_.get();
 }
 
 
-sf::IntRect Tileset::operator ()(unsigned int x, unsigned int y) const
+sf::Vector2u Tileset::getTilesetSize() const noexcept
 {
-    sf::IntRect textureRect {mat_(x,y)};
-    return std::move(textureRect);
+    return tilesetSize_;
 }
 
 
-sf::Vector2u Tileset::getTileSize() const
+sf::Vector2u Tileset::getTileSize() const noexcept
 {
-    return sf::Vector2u(tileWidth_, tileHeight_);
+    return tileSize_;
+}
+
+
+sf::IntRect Tileset::operator()(size_type x, size_type y) const noexcept
+{
+    return mat_(x,y);
+}
+
+
+sf::IntRect Tileset::operator[](size_type i) const  noexcept
+{
+    return tiles_.find(i)->second;
 }

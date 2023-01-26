@@ -1,30 +1,35 @@
 #ifndef TILESET_HPP
 #define TILESET_HPP
 
-#include <memory>
 #include <SFML/Graphics/Texture.hpp>
 #include <SFML/Graphics/VertexArray.hpp>
 
+#include <memory>
+#include <unordered_map>
+
 #include "ackmatrix/matrix.hpp"
 
-class Tileset
+
+class Tileset : public sf::NonCopyable
 {
+    using size_type = std::size_t;
 public:
-    Tileset();
-    explicit Tileset(unsigned int width, unsigned int height, sf::Texture &texture);
+    Tileset(unsigned int width, unsigned int height, sf::Texture &texture);
 
-    sf::Texture& getTexture() const;
-    sf::IntRect operator()(unsigned int x, unsigned int y) const;
+    sf::Texture& getTexture() const noexcept;
+    sf::Vector2u getTilesetSize() const noexcept;
+    sf::Vector2u getTileSize() const noexcept;
 
-    sf::Vector2u getTileSize() const;
+    sf::IntRect operator()(size_type x, size_type y) const noexcept;
+    sf::IntRect operator[](size_type i) const noexcept;
 
 private:
-    unsigned int tileWidth_;
-    unsigned int tileHeight_;
+    std::unique_ptr<sf::Texture> tilesetTexture_;
+    const sf::Vector2u tilesetSize_;
+    const sf::Vector2u tileSize_;
 
-    std::unique_ptr<sf::Texture> tileset_;
+    std::unordered_map<std::size_t, sf::IntRect> tiles_;
     ack::Matrix<sf::IntRect> mat_;
-
 };
 
 #endif // TILESET_HPP
