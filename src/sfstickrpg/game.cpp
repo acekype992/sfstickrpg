@@ -38,5 +38,5 @@ int main(int argc, char **argv)
 
 static void GameEngine::load_textures(AssetManager &assets)
 {
-    assets.loadTileset("tileset", "../resources/tilesetrpg.png");
+    assets.loadTileset("tileset", "../resources/tilesetrpg.png", true, true);
 }

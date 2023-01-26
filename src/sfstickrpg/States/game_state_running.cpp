@@ -26,7 +26,8 @@ void GameStateRunning::update()
 
 void GameStateRunning::draw()
 {
-    window.draw(*currentMap_);
+//    window.draw(*currentMap_);
+    window.draw(currentMap_->getTileset().getDrawableTileset());
 }
 
 

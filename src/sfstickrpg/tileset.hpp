@@ -1,6 +1,7 @@
 #ifndef TILESET_HPP
 #define TILESET_HPP
 
+#include <SFML/Graphics/Sprite.hpp>
 #include <SFML/Graphics/Texture.hpp>
 #include <SFML/Graphics/VertexArray.hpp>
 
@@ -10,21 +11,23 @@
 #include "ackmatrix/matrix.hpp"
 
 
-class Tileset : public sf::NonCopyable
+class Tileset
 {
-    using size_type = std::size_t;
+    using size_type = unsigned int;
 public:
-    Tileset(unsigned int width, unsigned int height, sf::Texture &texture);
+    Tileset(size_type width, size_type height, const sf::Texture &texture);
 
-    sf::Texture& getTexture() const noexcept;
+    const sf::Texture &getTexture() const noexcept;
     sf::Vector2u getTilesetSize() const noexcept;
     sf::Vector2u getTileSize() const noexcept;
 
     sf::IntRect operator()(size_type x, size_type y) const noexcept;
     sf::IntRect operator[](size_type i) const noexcept;
 
+    sf::Sprite getDrawableTileset() const noexcept;
+
 private:
-    std::unique_ptr<sf::Texture> tilesetTexture_;
+    const sf::Texture &tilesetTexture_;
     const sf::Vector2u tilesetSize_;
     const sf::Vector2u tileSize_;
 

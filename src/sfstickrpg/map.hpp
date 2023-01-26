@@ -12,7 +12,7 @@
 class Map : public sf::Drawable, public sf::Transformable, public sf::NonCopyable
 {
     using matrix_t  = ack::Matrix<int>;
-    using size_type = std::size_t;
+    using size_type = unsigned int;
 
 public:
     Map(const std::string &filename, const Tileset &tileset);
@@ -20,6 +20,8 @@ public:
         : tileset_ {std::move(map.tileset_)}
         , vertices_ {std::move(map.vertices_)}
     {}
+
+    const Tileset& getTileset() const noexcept;
 
 protected:
     void draw(sf::RenderTarget &target, sf::RenderStates states) const;

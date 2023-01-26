@@ -49,6 +49,11 @@ public:
             case Event::Resized:
                 resizeEvent(event.size);
                 break;
+            case Event::LostFocus:
+                window.setActive(false);
+                break;
+            case Event::GainedFocus:
+                window.setActive(true);
             default:
                 break;
             }

@@ -1,9 +1,9 @@
 #include "tileset.hpp"
 
 
-Tileset::Tileset(unsigned int width, unsigned int height, sf::Texture &texture)
-    : tilesetTexture_ {std::make_unique<sf::Texture>(texture)}
-    , tilesetSize_ {tilesetTexture_->getSize()}
+Tileset::Tileset(size_type width, size_type height, const sf::Texture &texture)
+    : tilesetTexture_ {texture}
+    , tilesetSize_ {tilesetTexture_.getSize()}
     , tileSize_{width, height}
 {
     sf::Vector2u matSize { tilesetSize_.x / tileSize_.x,
@@ -25,9 +25,9 @@ Tileset::Tileset(unsigned int width, unsigned int height, sf::Texture &texture)
 }
 
 
-sf::Texture& Tileset::getTexture() const noexcept
+const sf::Texture& Tileset::getTexture() const noexcept
 {
-    return *tilesetTexture_.get();
+    return tilesetTexture_;
 }
 
 
@@ -52,4 +52,13 @@ sf::IntRect Tileset::operator()(size_type x, size_type y) const noexcept
 sf::IntRect Tileset::operator[](size_type i) const  noexcept
 {
     return tiles_.find(i)->second;
+}
+
+
+sf::Sprite Tileset::getDrawableTileset() const noexcept
+{
+    sf::Sprite sprite;
+    sprite.setTexture(tilesetTexture_);
+
+    return sprite;
 }

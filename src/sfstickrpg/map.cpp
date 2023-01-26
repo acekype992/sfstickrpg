@@ -33,6 +33,12 @@ Map::Map(const std::string &filename, const Tileset &tileset)
 }
 
 
+const Tileset& Map::getTileset() const noexcept
+{
+    return tileset_;
+}
+
+
 void Map::draw(sf::RenderTarget &target, sf::RenderStates states) const
 {
     states.transform *= getTransform();

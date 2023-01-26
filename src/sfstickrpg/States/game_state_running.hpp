@@ -29,6 +29,7 @@ private:
     sf::View gameView_;
     float gameViewZoom_;
 
+    Tileset mapTileset_;
     std::unordered_map<std::string, Map> mapByString_;
     Map *currentMap_;
 };
