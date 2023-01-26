@@ -5,10 +5,6 @@
 #include "Core/game_engine_data.hpp"
 #include "States/game_state_running.hpp"
 
-#include "tileset.hpp"
-#include "map.hpp"
-
-#include <SFML/Graphics/Sprite.hpp>
 
 int main(int argc, char **argv)
 {
@@ -23,11 +19,6 @@ int main(int argc, char **argv)
 
     geData.states.add_state(std::make_unique<GameStateRunning>(geData));
 
-    Tileset tileset {32, 32, geData.assets.getTexture("tileset")};
-
-    Map sp;
-    sp.initialize(15, 15, tileset);
-
     while(geData.window.isOpen())
     {
         geData.states.process();
@@ -36,10 +27,8 @@ int main(int argc, char **argv)
         geData.states.current_state()->pre_update();
         geData.states.current_state()->update();
 
-
         geData.window.clear(sf::Color::Black);
         geData.states.current_state()->draw();
-        geData.window.draw(sp);
         geData.window.display();
     }
 
@@ -49,5 +38,5 @@ int main(int argc, char **argv)
 
 static void GameEngine::load_textures(AssetManager &assets)
 {
-    assets.loadTexture("tileset", "../resources/tilesetrpg.png");
+    assets.loadTileset("tileset", "../resources/tilesetrpg.png");
 }

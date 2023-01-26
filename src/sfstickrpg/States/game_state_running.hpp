@@ -3,6 +3,10 @@
 
 #include "Core/state_game.hpp"
 
+#include <unordered_map>
+
+#include "map.hpp"
+
 class GameStateRunning : public StateGame
 {
 public:
@@ -22,6 +26,11 @@ protected:
     void resizeEvent(const Event::SizeEvent &event) override;
 
 private:
+    sf::View gameView_;
+    float gameViewZoom_;
+
+    std::unordered_map<std::string, Map> mapByString_;
+    Map *currentMap_;
 };
 
 #endif // GAME_STATE_RUNNING_HPP
