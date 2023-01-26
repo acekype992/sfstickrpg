@@ -22,6 +22,7 @@ set(SFSTICKRPG_SOURCES sfstickrpg/Core/asset_manager.cpp
 
                        sfstickrpg/States/game_state_running.cpp
 
+                       sfstickrpg/map.cpp
                        sfstickrpg/tileset.cpp
 )
 
