@@ -7,9 +7,12 @@
 #include <SFML/Graphics/Font.hpp>
 #include <SFML/Graphics/Texture.hpp>
 
+#include "tileset.hpp"
+
 class AssetManager
 {
     using TexturePtr = std::unique_ptr<sf::Texture>;
+    using TilesetPtr = std::unique_ptr<Tileset>;
     using FontPtr    = std::unique_ptr<sf::Font>;
 
 public:
@@ -19,11 +22,15 @@ public:
     void loadTexture(const std::string &name, const std::string &filename, bool smoothOn = false, bool repeatOn = false);
     sf::Texture& getTexture(const std::string &name);
 
+    void loadTileset(const std::string &name, const std::string &filename, bool smoothOn = false, bool repeatOn = false);
+    Tileset& getTileset(const std::string &name);
+
     void loadFont(const std::string &name, const std::string &filename, bool smoothOn = false);
     sf::Font& getFont(const std::string &name);
 
 private:
     std::unordered_map<std::string, TexturePtr> textures_;
+    std::unordered_map<std::string, TilesetPtr> tilesets_;
     std::unordered_map<std::string, FontPtr> fonts_;
 };
 

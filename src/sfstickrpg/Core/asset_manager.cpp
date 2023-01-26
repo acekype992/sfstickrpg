@@ -23,6 +23,32 @@ sf::Texture& AssetManager::getTexture(const std::string &name)
     return *textures_[name].get();
 }
 
+
+void AssetManager::loadTileset(const std::string &name, const std::string &filename, bool smoothOn, bool repeatOn)
+{
+    assert(tilesets_.find(name) == tilesets_.end() &&
+           "the name to identify the tileset already exists");
+
+    sf::Texture texture;
+    if(!texture.loadFromFile(filename))
+        throw std::runtime_error("Cannot open file for load tileset");
+
+    texture.setSmooth(smoothOn);
+    texture.setRepeated(repeatOn);
+
+    TilesetPtr tileset = std::make_unique<Tileset>(32, 32, texture);
+    tilesets_.insert({name, std::move(tileset)});
+}
+
+Tileset& AssetManager::getTileset(const std::string &name)
+{
+    assert(tilesets_.find(name) != tilesets_.end() &&
+            "the requested tileset cannot be found");
+
+    return *tilesets_[name].get();
+}
+
+
 void AssetManager::loadFont(const std::string &name, const std::string &filename, bool smoothOn)
 {
     assert(fonts_.find(name) == fonts_.end() &&
