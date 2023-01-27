@@ -22,7 +22,7 @@ public:
     void loadTexture(const std::string &name, const std::string &filename, bool smoothOn = false, bool repeatOn = false);
     sf::Texture& getTexture(const std::string &name);
 
-    void loadTileset(const std::string &name, const std::string &filename, bool smoothOn = false, bool repeatOn = false);
+    void loadTileset(const std::string &name, sf::Vector2u tileSize, const std::string &filename);
     Tileset& getTileset(const std::string &name);
 
     void loadFont(const std::string &name, const std::string &filename, bool smoothOn = false);

@@ -1,6 +1,7 @@
 #include <cassert>
 #include "asset_manager.hpp"
 
+
 void AssetManager::loadTexture(const std::string &name, const std::string &filename, bool smoothOn, bool repeatOn)
 {
     assert(textures_.find(name) == textures_.end() &&
@@ -24,19 +25,12 @@ sf::Texture& AssetManager::getTexture(const std::string &name)
 }
 
 
-void AssetManager::loadTileset(const std::string &name, const std::string &filename, bool smoothOn, bool repeatOn)
+void AssetManager::loadTileset(const std::string &name, sf::Vector2u tileSize ,const std::string &filename)
 {
     assert(tilesets_.find(name) == tilesets_.end() &&
            "the name to identify the tileset already exists");
 
-    sf::Texture texture;
-    if(!texture.loadFromFile(filename))
-        throw std::runtime_error("Cannot open file for load tileset");
-
-    texture.setSmooth(smoothOn);
-    texture.setRepeated(repeatOn);
-
-    TilesetPtr tileset = std::make_unique<Tileset>(32, 32, texture);
+    TilesetPtr tileset = std::make_unique<Tileset>(tileSize, filename);
     tilesets_.insert({name, std::move(tileset)});
 }
 
