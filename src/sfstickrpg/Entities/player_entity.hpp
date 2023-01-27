@@ -1,41 +1,34 @@
 #ifndef PLAYER_ENTITY_HPP
 #define PLAYER_ENTITY_HPP
 
+#include <SFML/System/Clock.hpp>
+
 #include "entity.hpp"
 
 
 class PlayerEntity : public Entity
 {
 public:
-
-    bool animate_;
-
     PlayerEntity();
 
     virtual ~PlayerEntity() = default;
 
     virtual void update() override;
 
-    void setTileset(sf::Vector2i tileSize, sf::Texture &texture, int anims, bool direction);
-    void setDirection(Direction direction);
-    void move(float x, float y);
-    void cancelMove();
-    sf::FloatRect getBoundingRect()
+    void setAnim(int anims)
     {
-        return getTransform().transformRect(sprite_.getLocalBounds());
+        animCount_ = anims;
     }
 
+    bool animOn;
+    Direction direction;
+    float speed;
 private:
-    sf::Clock clockAnim_;
+    sf::Clock animClock_;
+    int  animCount_;
+    int  animMove_;
+    int  animDir_;
 
-    int animation_count_;
-    int current_animation_;
-    Direction direction_;
-    int current_direction_;
-
-    sf::Vector2f lastPos_;
-
-    sf::Vector2i tileSize_;
 };
 
 #endif // PLAYER_ENTITY_HPP

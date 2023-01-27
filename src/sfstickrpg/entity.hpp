@@ -7,23 +7,36 @@
 #include <SFML/Graphics/RenderTarget.hpp>
 #include <SFML/Graphics/Texture.hpp>
 #include <SFML/Graphics/Sprite.hpp>
-#include <SFML/System/Clock.hpp>
 
-enum class Direction { up, left, right, down };
+#include "tileset.hpp"
 
 
 class Entity : public sf::Drawable, public sf::Transformable, public sf::NonCopyable
 {
 public:
-    Entity() : texture_{nullptr}
-    {}
+    enum class Direction { up, left, right, down };
 
     virtual ~Entity() = default;
 
-    void setTexture(sf::Texture &texture) noexcept
+    void initialize(const Tileset &tileset) noexcept
     {
-        texture_ = &texture;
-        sprite_.setTexture(*texture_);
+        tileset_ = &tileset;
+        sprite_.setTexture(tileset_->getTexture());
+    }
+
+    void setMapPosition(int x, int y)
+    {
+        x *= tileset_->getTileSize().x;
+        y *= tileset_->getTileSize().y;
+        sf::Transformable::setPosition(x, y);
+    }
+
+    sf::Vector2i getMapPosition() const
+    {
+        sf::Vector2i position {sf::Transformable::getPosition()};
+        position.x /= tileset_->getTileSize().x;
+        position.y /= tileset_->getTileSize().y;
+        return position;
     }
 
     virtual void update() = 0;
@@ -36,7 +49,8 @@ protected:
     }
 
     sf::Sprite sprite_;
-    sf::Texture *texture_;
+    const Tileset *tileset_;
+
 };
 
 #endif // ENTITY_HPP

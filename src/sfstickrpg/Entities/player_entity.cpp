@@ -2,80 +2,56 @@
 
 
 PlayerEntity::PlayerEntity()
-    : direction_{Direction::down}
-    , current_animation_ {0}
-    , current_direction_ {0}
-{}
-
-
-
-void PlayerEntity::setTileset(sf::Vector2i tileSize, sf::Texture &texture, int anims, bool direction)
+    : direction {Direction::down}
+    , animOn {false}
+    , animCount_ {1}
+    , animMove_ {0}
+    , animDir_ {0}
 {
-    setTexture(texture);
-    tileSize_ = tileSize;
-    animation_count_ = anims;
 }
 
 
 void PlayerEntity::update()
 {
-    switch(direction_)
+    switch(direction)
     {
     case Direction::up:
-        current_direction_ = 1;
+        animDir_ = 1;
         break;
     case Direction::left:
-        current_direction_ = 2;
+        animDir_ = 2;
         break;
     case Direction::right:
-        current_direction_ = 3;
+        animDir_ = 3;
         break;
     case Direction::down:
-        current_direction_ = 0;
+        animDir_ = 0;
+        break;
+
+    default:
         break;
     }
 
-    if(clockAnim_.getElapsedTime().asSeconds() > 0.25)
+    if(animClock_.getElapsedTime().asSeconds() > 0.25)
     {
-        if(animate_)
+        if(animOn)
         {
-            ++current_animation_;
-            if(current_animation_ > (animation_count_ - 1))
-            {
-                current_animation_ = 0;
-            }
+            ++animMove_;
+            if(animMove_ > (animCount_ - 1))
+                animMove_ = 0;
         }
-        else
+        else if(animMove_ > 0)
         {
-            current_animation_ = 0;
+            animMove_ = 0;
         }
-        clockAnim_.restart();
+        animClock_.restart();
     }
 
-    sf::IntRect rect {current_animation_ * tileSize_.x,
-                      current_direction_ * tileSize_.y,
-                      tileSize_.x,
-                      tileSize_.y
-                     };
+    sf::IntRect rect = (*tileset_)(animMove_, animDir_);
+    rect.left *= tileset_->getTileSize().x;
+    rect.top  *= tileset_->getTileSize().y;
 
     sprite_.setTextureRect(rect);
 }
 
 
-void PlayerEntity::setDirection(Direction direction)
-{
-    direction_ = direction;
-}
-
-
-void PlayerEntity::move(float x, float y)
-{
-    lastPos_ = sf::Transformable::getPosition();
-    sf::Transformable::move(x, y);
-}
-
-
-void PlayerEntity::cancelMove()
-{
-    sf::Transformable::setPosition(lastPos_);
-}
