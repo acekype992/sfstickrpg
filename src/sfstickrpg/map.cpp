@@ -1,24 +1,25 @@
 #include "map.hpp"
 
 
-Map::Map(const std::string &filename, const Tileset &tileset)
+Map::Map(const Tileset &tileset, const std::string &filename)
     : tileset_ {tileset}
 {
-    matrix_t mx;
-    mx.loadFromFile(filename);
+
+    mapMatrix_.loadFromFile(filename);
 
     const size_type tw {tileset_.getTileSize().x};
     const size_type th {tileset_.getTileSize().y};
 
     vertices_.setPrimitiveType(sf::Quads);
     vertices_.resize(tw * th * 4);
-    for(std::size_t y {0}; y < mx.rows(); ++y)
-        for(std::size_t x {0}; x < mx.columns(); ++x)
+
+    for(std::size_t y {0}; y < mapMatrix_.rows(); ++y)
+        for(std::size_t x {0}; x < mapMatrix_.columns(); ++x)
         {
-            size_type tIndex = mx(x,y);
+            size_type tIndex = mapMatrix_(x,y);
             sf::IntRect tr = tileset_[tIndex];
 
-            sf::Vertex *quad = &vertices_[(y * mx.columns() + x) * 4];
+            sf::Vertex *quad = &vertices_[(y * mapMatrix_.columns() + x) * 4];
 
             quad[0].position = sf::Vector2f(x * tw     , y * th);
             quad[1].position = sf::Vector2f((x+1) * tw , y * th);
@@ -33,9 +34,10 @@ Map::Map(const std::string &filename, const Tileset &tileset)
 }
 
 
-const Tileset& Map::getTileset() const noexcept
+sf::Vector2u Map::getSize() const noexcept
 {
-    return tileset_;
+    return sf::Vector2u(mapMatrix_.columns() * tileset_.getTileSize().x,
+                        mapMatrix_.rows()    * tileset_.getTileSize().y);
 }
 
 
