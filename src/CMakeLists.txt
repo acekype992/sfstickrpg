@@ -12,6 +12,9 @@ set(SFSTICKRPG_HEADERS sfstickrpg/Core/game_engine_data.hpp
 
                        sfstickrpg/States/game_state_running.hpp
 
+                       sfstickrpg/Entities/player_entity.hpp
+
+                       sfstickrpg/entity.hpp
                        sfstickrpg/map.hpp
                        sfstickrpg/tileset.hpp
 )
@@ -21,6 +24,8 @@ set(SFSTICKRPG_SOURCES sfstickrpg/Core/asset_manager.cpp
                        sfstickrpg/game.cpp
 
                        sfstickrpg/States/game_state_running.cpp
+
+                       sfstickrpg/Entities/player_entity.cpp
 
                        sfstickrpg/map.cpp
                        sfstickrpg/tileset.cpp
