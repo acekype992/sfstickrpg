@@ -14,10 +14,8 @@ set(SFML_STATIC ON CACHE BOOL "" FORCE)
 
 add_subdirectory(SFML)
 
-set_target_properties(sfml-graphics PROPERTIES ARCHIVE_OUTPUT_DIRECTORY ${CMAKE_CURRENT_SOURCE_DIR}/lib/)
-set_target_properties(sfml-system   PROPERTIES ARCHIVE_OUTPUT_DIRECTORY ${CMAKE_CURRENT_SOURCE_DIR}/lib/)
-set_target_properties(sfml-window   PROPERTIES ARCHIVE_OUTPUT_DIRECTORY ${CMAKE_CURRENT_SOURCE_DIR}/lib/)
-
 set(SFML_LIBS sfml-graphics sfml-system sfml-window PARENT_SCOPE)
 set(SFML_INCLUDE_DIR ${CMAKE_CURRENT_SOURCE_DIR}/SFML/include PARENT_SCOPE)
 
+add_custom_target(ackmatrix SOURCES ackmatrix/matrix.hpp
+                                    ackmatrix/generic_matrix.hpp)
