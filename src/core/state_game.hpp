@@ -46,6 +46,9 @@ public:
             case Event::MouseButtonPressed:
                 mouseClickEvent(event.mouseButton);
                 break;
+            case Event::MouseButtonReleased:
+                mouseReleaseEvent(event.mouseButton);
+                break;
             case Event::Resized:
                 resizeEvent(event.size);
                 break;
@@ -70,6 +73,7 @@ protected:
     virtual void keyReleaseEvent(const KeyEvent &event) = 0;
     virtual void mouseMoveEvent(const MouseMoveEvent &event) = 0;
     virtual void mouseClickEvent(const MouseButtonEvent &event) = 0;
+    virtual void mouseReleaseEvent(const MouseButtonEvent &event) = 0;
     virtual void resizeEvent(const SizeEvent &event) = 0;
 
     AssetManager& assets;

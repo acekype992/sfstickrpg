@@ -20,7 +20,7 @@
 #include "asset_manager.hpp"
 #include "state_manager.hpp"
 
-namespace GameEngine {
+namespace Game {
 
 static void load_textures(AssetManager &assets);;
 
@@ -34,6 +34,6 @@ struct GameEngineData
     sf::RenderWindow window;
 };
 
-} // GameEngine namespace
+} // Game namespace
 
 #endif // GAME_ENGINE_DATA_HPP

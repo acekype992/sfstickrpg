@@ -39,6 +39,11 @@ public:
         return position;
     }
 
+    sf::FloatRect getBoundingRect() const noexcept
+    {
+        return sprite_.getGlobalBounds();
+    }
+
     virtual void update() = 0;
 
 protected:
