@@ -2,7 +2,7 @@ set(MAPEDITOR_SOURCES mapeditor/mapeditor.cpp)
 
 add_executable(map_editor ${MAPEDITOR_SOURCES})
 
-target_link_libraries(map_editor ${SFML_LIBS})
+target_link_libraries(map_editor ${SFML_LIBS} gui)
 
 set_target_properties(map_editor
     PROPERTIES

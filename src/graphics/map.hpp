@@ -1,40 +1,24 @@
 #ifndef MAP_HPP
 #define MAP_HPP
 
-#include <SFML/Graphics/Drawable.hpp>
-#include <SFML/Graphics/RenderStates.hpp>
-#include <SFML/Graphics/RenderTarget.hpp>
-#include <SFML/Graphics/Transformable.hpp>
-#include <SFML/Graphics/VertexArray.hpp>
+#include "map_base.hpp"
+#include "graphics/drawable.hpp"
 
-#include "tileset.hpp"
-
-
-class Map : public sf::Drawable, public sf::Transformable
+class Map : public base_Map, public Drawable
 {
-    using size_type = std::size_t;
-
 public:
-    Map(Tileset &tileset, const std::string &filename);
-    Map(Tileset &tileset, size_type w, size_type h);
+    Map(sf::Vector2u size, base_Tileset *tileset);
+    virtual ~Map() noexcept = default;
 
-    ~Map() noexcept = default;
-
-    void setTile(size_type x, size_type y, sf::IntRect rect);
-
-    sf::FloatRect getBoundingRect() const noexcept;
-    sf::Vector2u getSize() const noexcept;
+    virtual sf::IntRect getGlobalBounds() const noexcept override;
 
 protected:
-    void draw(sf::RenderTarget &target, sf::RenderStates states) const;
+    virtual void initializeDraw(sf::RenderTarget &target, const sf::RenderStates &states) const override;
 
 private:
-    Tileset &tileset_;
-    sf::VertexArray vertices_;
-    ack::Matrix<size_type> mapMatrix_;
-public:
-    std::vector<sf::IntRect> tilesRect_;
-
+    sf::RectangleShape boundingRect_;
 };
 
+
 #endif // MAP_HPP
+

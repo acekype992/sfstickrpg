@@ -1,21 +1,26 @@
 #ifndef WINDOW_HPP
-#define  WINDOW_HPP
+#define WINDOW_HPP
+
+#include "notcopyable.hpp"
 
 #include <SFML/Graphics/RenderWindow.hpp>
 
-
-class Window
+class Window : public NotCopyable
 {
     using size_type = unsigned int;
 
 public:
-    Window();
-    Window(size_type width, size_type height);
+    Window(size_type width, size_type height, const std::string &title);
+    ~Window() noexcept = default;
 
-    virtual ~Window() = default;
+    void show();
 
 private:
+    void processEvents();
+
     sf::RenderWindow window_;
+    sf::View windowView_;
+
 };
 
 

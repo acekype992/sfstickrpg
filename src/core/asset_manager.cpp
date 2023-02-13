@@ -25,24 +25,6 @@ sf::Texture& AssetManager::getTexture(const std::string &name)
 }
 
 
-void AssetManager::loadTileset(const std::string &name, sf::Vector2u tileSize ,const std::string &filename)
-{
-    assert(tilesets_.find(name) == tilesets_.end() &&
-           "the name to identify the tileset already exists");
-
-    TilesetPtr tileset = std::make_unique<Tileset>(tileSize, filename);
-    tilesets_.insert({name, std::move(tileset)});
-}
-
-Tileset& AssetManager::getTileset(const std::string &name)
-{
-    assert(tilesets_.find(name) != tilesets_.end() &&
-            "the requested tileset cannot be found");
-
-    return *tilesets_[name].get();
-}
-
-
 void AssetManager::loadFont(const std::string &name, const std::string &filename, bool smoothOn)
 {
     assert(fonts_.find(name) == fonts_.end() &&
